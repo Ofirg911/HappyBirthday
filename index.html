@@ -11,8 +11,9 @@
     text-align: center;
     margin: 0; 
     padding: 20px;
-    height: 100vh;
-    overflow: hidden; /* למנוע גלילה מיותרת */
+    min-height: 100vh; /* שונה מ-height ל-min-height */
+    overflow-y: auto; /* שונה מ-hidden ל-auto */
+    overflow-x: hidden; /* נשאר hidden לצמצום גלילה אופקית */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,6 +82,7 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     transform: translateY(20px);
     animation: slideUp 0.8s ease-out forwards;
+    margin-bottom: 40px; /* מרווח בתחתית לגלילה */
   }
   #card-presentation .card-title {
     color: #e91e63;
