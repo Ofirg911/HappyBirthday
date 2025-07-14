@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<img class="card-img" src="rby.jpg" alt="כרטיס לסרט גברת רביץ">
 <html lang="he">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>כרטיס מתנה - גברת רביץ</title>
+  <title>כרטיס מתנה - גברת רביע</title>
   <style>
     body {
       background: #fff8e1;
@@ -35,62 +34,31 @@
       0% { transform: scale(0.7); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
-    .card-img {
-      margin: 40px auto;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-      max-width: 95vw;
-      width: 500px;
-      display: block;
-    }
     .message {
       font-size: 1.5em;
-      margin: 20px 0;
+      margin: 30px 0 10px 0;
       color: #333;
+    }
+    .love {
+      font-size: 1.2em;
+      color: #d32f2f;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+    .love .heart {
+      color: #e53935;
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 6px;
     }
     @media (max-width: 600px) {
       .popup { font-size: 1.5em; padding: 10px 10px; }
-      .card-img { width: 98vw; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="popup">🎈 יום הולדת שמח! 🎉</div>
-    <p class="message">הנה כרטיס המתנה שלך לסרט "גברת רביץ"</p>
-    <canvas id="confetti"></canvas>
-    <img class="card-img" src="https://pplx-res.cloudinary.com/image/private/user_uploads/25009427/3b7e5644-8327-4d84-8477-b21fece570f8/rby.jpg" alt="כרטיס לסרט גברת רביץ">
-    <p class="message">בילוי נעים! 🎬</p>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
-    // Run confetti when page loads
-    window.onload = function() {
-      // Initial confetti burst
-      confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.6 }
-      });
-      
-      // Additional confetti bursts
-      setTimeout(function() {
-        confetti({
-          particleCount: 100,
-          spread: 160,
-          origin: { x: 0.1, y: 0.5 }
-        });
-      }, 500);
-      
-      setTimeout(function() {
-        confetti({
-          particleCount: 100,
-          spread: 160,
-          origin: { x: 0.9, y: 0.5 }
-        });
-      }, 1000);
-    }
-  </script>
-</body>
-</html>
+    <p class="message">הנה כרטיס המתנה שלך למופע הסטנדאפ "גברת רביע"</p>
+    <div style="font-size:2em; margin: 30px 0;">🎤</div>
+    <p class="message">בילוי
