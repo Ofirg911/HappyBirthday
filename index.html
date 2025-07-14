@@ -14,7 +14,6 @@
     height: 100vh;
     overflow-x: hidden;
   }
-  
   .title {
     color: #d84315;
     font-size: 2em;
@@ -22,7 +21,6 @@
     margin: 20px 0;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   }
-  
   /* מעטפה משופרת */
   #envelope {
     width: 300px;
@@ -37,7 +35,6 @@
     perspective: 1000px;
     border: 1px solid #e0a800;
   }
-  
   #envelope:before {
     content: '';
     position: absolute;
@@ -48,7 +45,6 @@
     background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
     pointer-events: none;
   }
-  
   #flap {
     width: 300px;
     height: 100px;
@@ -64,7 +60,6 @@
     border-bottom: 1px solid #e0a800;
     z-index: 2;
   }
-  
   #flap:after {
     content: '';
     position: absolute;
@@ -74,7 +69,6 @@
     height: 20px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
   }
-  
   #envelope-content {
     position: absolute;
     top: 0;
@@ -88,13 +82,11 @@
     color: #7e57c2;
     z-index: 1;
   }
-  
   #card-container {
     display: none;
     margin-top: 20px;
     text-align: center;
   }
-  
   #card {
     max-width: 90vw;
     width: 300px;
@@ -103,7 +95,6 @@
     margin: 0 auto;
     display: block;
   }
-  
   #message {
     margin-top: 30px;
     font-size: 1.3em;
@@ -111,7 +102,6 @@
     font-weight: bold;
     animation: fadeIn 1s;
   }
-  
   #heart {
     color: #e53935;
     font-size: 1.5em;
@@ -119,46 +109,37 @@
     margin-right: 6px;
     animation: pulse 1.5s infinite;
   }
-  
   #instructions {
     font-size: 1em;
     color: #555;
     margin-top: 15px;
     animation: fadeIn 1s;
   }
-  
   @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
   }
-  
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  
-  /* תוספת של אייקונים על המעטפה */
   .envelope-decoration {
     position: absolute;
     font-size: 1.2em;
     color: rgba(0,0,0,0.2);
     z-index: 3;
   }
-  
   .decoration-1 {
     top: 20px;
     left: 30px;
     transform: rotate(-15deg);
   }
-  
   .decoration-2 {
     top: 20px;
     right: 30px;
     transform: rotate(15deg);
   }
-  
-  /* שיפור מראה הטקסט */
   .subtitle {
     font-size: 1.2em;
     color: #555;
@@ -193,83 +174,42 @@
 
 <!-- ספריית קונפטי משופרת -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script>
   const flap = document.getElementById('flap');
   const envelope = document.getElementById('envelope');
   const envelopeContent = document.getElementById('envelope-content');
   const cardContainer = document.getElementById('card-container');
   const instructions = document.getElementById('instructions');
-  
   let startY = null;
   let opened = false;
-  
-  // פונקציה להפעלת קונפטי מרשים
   function runConfetti() {
-    // קונפטי מרכזי
-    confetti({
-      particleCount: 150,
-      spread: 100,
-      origin: { y: 0.6, x: 0.5 }
-    });
-    
-    // קונפטי מצד שמאל
-    setTimeout(() => {
-      confetti({
-        particleCount: 80,
-        angle: 60,
-        spread: 70,
-        origin: { x: 0, y: 0.65 }
-      });
-    }, 250);
-    
-    // קונפטי מצד ימין
-    setTimeout(() => {
-      confetti({
-        particleCount: 80,
-        angle: 120,
-        spread: 70,
-        origin: { x: 1, y: 0.65 }
-      });
-    }, 400);
-    
-    // קונפטי נוסף מלמעלה
-    setTimeout(() => {
-      confetti({
-        particleCount: 100,
-        spread: 160,
-        origin: { x: 0.5, y: 0.3 }
-      });
-    }, 1000);
+    confetti({particleCount: 150,spread: 100,origin: { y: 0.6, x: 0.5 }});
+    setTimeout(() => {confetti({particleCount: 80,angle: 60,spread: 70,origin: { x: 0, y: 0.65 }});}, 250);
+    setTimeout(() => {confetti({particleCount: 80,angle: 120,spread: 70,origin: { x: 1, y: 0.65 }});}, 400);
+    setTimeout(() => {confetti({particleCount: 100,spread: 160,origin: { x: 0.5, y: 0.3 }});}, 1000);
   }
-  
-  // טיפול באירועי מגע
   envelope.addEventListener('touchstart', e => {
     if (opened) return;
     startY = e.touches[0].clientY;
-    e.preventDefault(); // מניעת גלילה
+    e.preventDefault();
   });
-  
   envelope.addEventListener('touchmove', e => {
     if (opened || startY === null) return;
     const currentY = e.touches[0].clientY;
     const deltaY = startY - currentY;
-    if (deltaY > 0) { // החלקה למעלה
+    if (deltaY > 0) {
       let rotateX = Math.min(deltaY / 2, 180);
       flap.style.transform = `rotateX(${rotateX}deg)`;
     }
-    e.preventDefault(); // מניעת גלילה
+    e.preventDefault();
   });
-  
   envelope.addEventListener('touchend', e => {
     if (opened || startY === null) return;
     const endY = e.changedTouches[0].clientY;
     const deltaY = startY - endY;
     if (deltaY > 50) {
-      // פתיחת המעטפה לגמרי
       flap.style.transform = 'rotateX(180deg)';
       opened = true;
-      
       setTimeout(() => {
         envelope.style.display = 'none';
         cardContainer.style.display = 'block';
@@ -277,21 +217,17 @@
         runConfetti();
       }, 800);
     } else {
-      // סגירת המעטפה בחזרה
       flap.style.transform = 'rotateX(0deg)';
     }
     startY = null;
   });
-  
-  // תמיכה גם בעכבר (למחשב)
+  // תמיכה במחשב
   let mouseDown = false;
-  
   envelope.addEventListener('mousedown', e => {
     if (opened) return;
     mouseDown = true;
     startY = e.clientY;
   });
-  
   document.addEventListener('mousemove', e => {
     if (!mouseDown || opened) return;
     const deltaY = startY - e.clientY;
@@ -300,19 +236,15 @@
       flap.style.transform = `rotateX(${rotateX}deg)`;
     }
   });
-  
   document.addEventListener('mouseup', e => {
     if (!mouseDown || opened) {
       mouseDown = false;
       return;
     }
-    
     const deltaY = startY - e.clientY;
     if (deltaY > 50) {
-      // פתיחת המעטפה לגמרי
       flap.style.transform = 'rotateX(180deg)';
       opened = true;
-      
       setTimeout(() => {
         envelope.style.display = 'none';
         cardContainer.style.display = 'block';
@@ -320,21 +252,15 @@
         runConfetti();
       }, 800);
     } else {
-      // סגירת המעטפה בחזרה
       flap.style.transform = 'rotateX(0deg)';
     }
-    
     mouseDown = false;
     startY = null;
   });
-  
-  // כפתור פתיחה (למקרה שהאינטראקציה לא עובדת)
   envelopeContent.addEventListener('click', () => {
     if (opened) return;
-    
     flap.style.transform = 'rotateX(180deg)';
     opened = true;
-    
     setTimeout(() => {
       envelope.style.display = 'none';
       cardContainer.style.display = 'block';
@@ -343,6 +269,5 @@
     }, 800);
   });
 </script>
-
 </body>
 </html>
