@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>מתנה חגיגית! - גברת רביע</title>
+<style>
+  body {
+    background: linear-gradient(to bottom right, #fce4ec, #f8bbd0); /* ורוד בהיר וחגיגי */
+    font-family: 'Arial Hebrew', 'Helvetica Neue', Arial, sans-serif;
+    text-align: center;
+    margin: 0; 
+    padding: 20px;
+    height: 100vh;
+    overflow: hidden; /* למנוע גלילה מיותרת */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .header-title {
+    color: #e91e63; /* ורוד פוקסיה חזק */
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    animation: fadeInDown 1s ease-out forwards;
+  }
+  .header-subtitle {
+    font-size: 1.4em;
+    color: #880e4f; /* ורוד כהה */
+    margin-bottom: 40px;
+    animation: fadeInDown 1.2s ease-out forwards;
+  }
+
+  /* כפתור זוהר ומושך */
+  #openButton {
+    background: linear-gradient(45deg, #ff80ab, #f06292); /* גווני ורוד זוהרים */
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 50px; /* צורה עגולה יותר */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 15px #f06292; /* צל וזוהר */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    animation: pulse 2s infinite, fadeIn 1.5s ease-out forwards;
+    transform: scale(0); /* יתחיל מוסתר */
+    animation-delay: 1.5s;
+    animation-fill-mode: forwards;
+  }
+  #openButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 25px #f06292;
+  }
+  #openButton:active {
+    transform: scale(0.98);
+  }
+
+  /* מעטפה וירטואלית - רק בשביל הסטייל */
+  .envelope-icon {
+    font-size: 5em;
+    color: #f06292; /* ורוד */
+    margin-top: 50px;
+    margin-bottom: 30px;
+    animation: bounceIn 1s ease-out forwards;
+    animation-delay: 0.5s;
+    transform: scale(0);
+  }
+
+  /* קונטיינר לכרטיס שיופיע אחרי הפתיחה */
+  #card-presentation {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1s forwards;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  #card-presentation .card-title {
+    color: #e91e63;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  #card-image {
+    max-width: 90vw;
+    width: 320px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    margin: 0 auto 20px;
+    display: block;
+    border: 5px solid white; /* מסגרת לבנה סביב הכרטיס */
+  }
+  .personal-message {
+    margin-top: 20px;
+    font-size: 1.4em;
+    color: #880e4f;
+    font-weight: bold;
+    animation: fadeIn 1s;
+  }
+  .personal-message .heart {
+    color: #ff5252; /* אדום בוהק */
+    font-size: 1.6em;
+    vertical-align: middle;
+    margin-right: 8px;
+    animation: pulse 1.5s infinite;
+  }
+
+  /* אנימציות */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  @keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+      -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+      transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0% { opacity: 0; -webkit-transform: scale3d(.3, .3, .3); transform: scale3d(.3, .3, .3); }
+    20% { -webkit-transform: scale3d(1.1, 1.1, 1.1); transform: scale3d(1.1, 1.1, 1.1); }
+    40% { -webkit-transform: scale3d(.9, .9, .9); transform: scale3d(.9, .9, .9); }
+    60% { opacity: 1; -webkit-transform: scale3d(1.03, 1.03, 1.03); transform: scale3d(1.03, 1.03, 1.03); }
+    80% { -webkit-transform: scale3d(.97, .97, .97); transform: scale3d(.97, .97, .97); }
+    100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* למובייל קטן יותר */
+  @media (max-width: 480px) {
+    .header-title { font-size: 2.2em; }
+    .header-subtitle { font-size: 1.1em; }
+    #openButton { font-size: 1.5em; padding: 15px 30px; }
+    .envelope-icon { font-size: 4em; }
+    .card-title { font-size: 1.5em; }
+    .personal-message { font-size: 1.2em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-title">🎉 יום הולדת שמח! 🎈</div>
+<div class="header-subtitle">יש לי הפתעה מיוחדת בשבילך...</div>
+
+<div class="envelope-icon">✉️</div> <!-- אייקון מעטפה חמוד -->
+
+<button id="openButton">לחצ/י לפתיחת המתנה!</button>
+
+<div id="card-presentation">
+  <div class="card-title">הנה כרטיס המתנה שלך למופע הסטנדאפ "גברת רביע"</div>
+  <img id="card-image" src="image.jpg" alt="כרטיס מתנה למופע גברת רביע" />
+  <div class="personal-message">
+    <span class="heart">❤️</span>אוהבת המון – יעל
+  </div>
+</div>
+
+<!-- ספריית קונפטי -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  const openButton = document.getElementById('openButton');
+  const envelopeIcon = document.querySelector('.envelope-icon');
+  const cardPresentation = document.getElementById('card-presentation');
+  
+  openButton.addEventListener('click', () => {
+    openButton.style.display = 'none'; // הסתרת הכפתור
+    envelopeIcon.style.display = 'none'; // הסתרת אייקון המעטפה
+    
+    // הפעלת קונפטי לפני הצגת הכרטיס
+    runConfetti();
+
+    // הצגת הכרטיס עם השהיה קצרה
+    setTimeout(() => {
+      cardPresentation.style.display = 'flex';
+    }, 500); 
+  });
+
+  // פונקציה להפעלת קונפטי מרשים
+  function runConfetti() {
+    confetti({particleCount: 200,spread: 120,origin: { y: 0.6, x: 0.5 }});
+    setTimeout(() => {confetti({particleCount: 100,angle: 60,spread: 80,origin: { x: 0, y: 0.65 }});}, 200);
+    setTimeout(() => {confetti({particleCount: 100,angle: 120,spread: 80,origin: { x: 1, y: 0.65 }});}, 400);
+    setTimeout(() => {confetti({particleCount: 150,spread: 180,origin: { x: 0.5, y: 0.3 }});}, 800);
+  }
+</script>
+
+</body>
+</html>
